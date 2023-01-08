@@ -73,6 +73,7 @@ if ($res) {
     $product_name = $all_data['Product_Name'];
     $product_desc = $all_data['product_desc'];
     $product_price = $all_data['price'];
+    $product_image = $all_data['image'];
     $product_id = $all_data['id'];
 
     echo '
@@ -84,7 +85,7 @@ if ($res) {
         <div class="card-img">
           <a href="Product.php?productid='.$product_id.'">
 
-            <img src="../assets/images/product_1.jpg" alt="banner-3" />
+          <center> <img src="'.$product_image.'" /></center>
           </a>
         </div>
 

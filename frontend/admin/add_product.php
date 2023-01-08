@@ -1,47 +1,53 @@
 <?php
 include '../../config.php';
 
-if (isset($_POST['submit'])) {  // when user clicks submit, store in db
+if (isset($_POST['submit'])) { // when user clicks submit, store in db
   $pname = $_POST['pname'];
   $pdesc = $_POST['pdesc'];
   $pprice = $_POST['pprice'];
-  $image = $_FILES['file'];
+  $image = $_FILES['files'];
+
+  // print_r($image);
 
   $image_name = $image['name'];
   $image_error = $image['error'];
   $file_temp = $image['tmp_name'];
 
-  $file_ext = explode('.', $image_name);
+  $file_ext = explode('.',$image_name);
   $file_check = strtolower(end($file_ext));
 
-  $file_types  = array('png','jpg','jpeg');
+  $file_types = array('png', 'jpg', 'jpeg');
 
-  if(in_array($file_check, $file_types)){
+  if (in_array($file_check,$file_types)) {
 
     //save image to folder
     $path = 'upload/'.$image_name;
     move_uploaded_file($file_temp, $path);
 
-    
+
+    $query = "insert into `products` (Product_Name,product_desc,price,image) values('$pname','$pdesc', '$pprice','$image_name')";
+    $run_query = mysqli_query($conn, $query);
 
 
   }
+}
 
 
 
-  $sql = "insert into `products` (Product_Name,product_desc,price,image) 
-  values('$pname','$pdesc', '$pprice')";
-  $result = mysqli_query($conn, $sql);
-  if ($result) {
+  // $sql = "insert into `products` (Product_Name,product_desc,price,image) 
+  // values('$pname','$pdesc', '$pprice')";
+
+  // $result = mysqli_query($conn, $sql);
+  // if ($result) {
     // echo '<script>alert("New Prodct Added")</script>';
 
     // redirect or go to page
-    header('location:products.php');
-  } else {
+    // header('location:products.php');
+  // } else {
 
-    die(mysqli_error($conn));
-  }
-}
+    // die(mysqli_error($conn));
+  // }
+// }
 
 
 
@@ -209,7 +215,7 @@ if (isset($_POST['submit'])) {  // when user clicks submit, store in db
                     <div class="height-400">
 
                       <!-- contant here pls  -->
-                      <form method="post">
+                      <form action="upload.php" method="post" enctype="multipart/form-data">
                         <div class="mb-3">
                           <label class="form-label">Product Name</label>
                           <input type="text" class="form-control" placeholder="product name" name="pname">
@@ -224,7 +230,7 @@ if (isset($_POST['submit'])) {  // when user clicks submit, store in db
                         </div>
                         <div class="mb-3">
                           <label class="form-label">Upload Image</label>
-                          <input type="file" name="file" class="form-control">
+                          <input type="file" name="file" id="file" class="form-control">
                         </div>
 
 

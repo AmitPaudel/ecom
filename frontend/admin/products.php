@@ -165,6 +165,7 @@ include '../../config.php';
                             <th scope="col">Product Name</th>
                             <th scope="col">Description</th>
                             <th scope="col">Price</th>
+                            <th scope="col">Image</th>
                             <th scope="col">Actions</th>
                           </tr>
                         </thead>
@@ -173,7 +174,7 @@ include '../../config.php';
                         <?php
 
                         $all_products = "select * from `products`";
-                        $res = mysqli_query($conn, $all_products);
+                        $res = mysqli_query($conn, $all_products);  
 
                         if ($res) {
 
@@ -181,13 +182,21 @@ include '../../config.php';
                             $product_name = $all_data['Product_Name'];
                             $product_desc = $all_data['product_desc'];
                             $product_price = $all_data['price'];
+                            $product_image = $all_data['image'];
                             $product_id = $all_data['id'];
+
+
+                       
+
 
                             echo '<tr>
                            
-                            <td>'.$product_name.'</td>
-                            <td>'.$product_desc.'</td>
-                            <td>'.$product_price.'</td>
+                            <td>' . $product_name . '</td>
+                            <td>' . $product_desc . '</td>
+                            <td>' . $product_price . '</td>
+                            <td>
+                            <center> <img src="'.$product_image.'" style="width:100px;height:100px;"/></center>
+                            </td>
                             <td><div>
                             <a href="update.php?updateid='.$product_id.'"> <button class="btn btn-light mr-1"> Edit</button></a>
                             <a href="delete.php?deleteid='.$product_id.'"> <button class="btn btn-danger ">
