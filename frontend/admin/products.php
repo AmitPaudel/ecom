@@ -189,10 +189,10 @@ include '../../config.php';
                             <td>'.$product_desc.'</td>
                             <td>'.$product_price.'</td>
                             <td><div>
-                              <button class="btn btn-light mr-1"> <a href="update.php?updateid='.$product_id.'">Edit</a></button>
-                              <button class="btn btn-danger ">
-                                <a href="delete.php?deleteid='.$product_id.'">Delete</a>
-                              </button>
+                            <a href="update.php?updateid='.$product_id.'"> <button class="btn btn-light mr-1"> Edit</button></a>
+                            <a href="delete.php?deleteid='.$product_id.'"> <button class="btn btn-danger ">
+                                Delete
+                              </button></a>
                             </div></td>
                           </tr>';
                           }

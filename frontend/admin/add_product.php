@@ -5,9 +5,31 @@ if (isset($_POST['submit'])) {  // when user clicks submit, store in db
   $pname = $_POST['pname'];
   $pdesc = $_POST['pdesc'];
   $pprice = $_POST['pprice'];
+  $image = $_FILES['file'];
+
+  $image_name = $image['name'];
+  $image_error = $image['error'];
+  $file_temp = $image['tmp_name'];
+
+  $file_ext = explode('.', $image_name);
+  $file_check = strtolower(end($file_ext));
+
+  $file_types  = array('png','jpg','jpeg');
+
+  if(in_array($file_check, $file_types)){
+
+    //save image to folder
+    $path = 'upload/'.$image_name;
+    move_uploaded_file($file_temp, $path);
+
+    
 
 
-  $sql = "insert into `products` (Product_Name,product_desc,price) 
+  }
+
+
+
+  $sql = "insert into `products` (Product_Name,product_desc,price,image) 
   values('$pname','$pdesc', '$pprice')";
   $result = mysqli_query($conn, $sql);
   if ($result) {
@@ -199,6 +221,10 @@ if (isset($_POST['submit'])) {  // when user clicks submit, store in db
                         <div class="mb-3">
                           <label class="form-label">Product Price</label>
                           <input type="text" class="form-control" placeholder="product name" name="pprice">
+                        </div>
+                        <div class="mb-3">
+                          <label class="form-label">Upload Image</label>
+                          <input type="file" name="file" class="form-control">
                         </div>
 
 

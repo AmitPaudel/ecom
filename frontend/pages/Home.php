@@ -1,3 +1,10 @@
+<?php
+include '../../config.php';
+
+
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -53,82 +60,77 @@
 
   <!-- list of products -->
 
-  <?php
-  require_once "../../config.php";
   
-
-
-
-  ?>
  
   <section class="list_of_products">
-    <div class="row">
+  <div class="row">
+ <?php 
+
+$all_products = "select * from `products`";
+$res = mysqli_query($conn, $all_products);
+if ($res) {
+  while ($all_data = mysqli_fetch_assoc($res)) {
+    $product_name = $all_data['Product_Name'];
+    $product_desc = $all_data['product_desc'];
+    $product_price = $all_data['price'];
+    $product_id = $all_data['id'];
+
+    echo '
+ 
+
 
 
       <div class="col-md-3 card">
         <div class="card-img">
-          <a href="Product.php">
+          <a href="Product.php?productid='.$product_id.'">
 
             <img src="../assets/images/product_1.jpg" alt="banner-3" />
           </a>
         </div>
+
+
+        
+        <h3 class="product_name">'.$product_name.'</h3>
+        
+       
         <div class="card-details">
-          <div class="card-price">
-            100000
-          </div>
-          <div class="card-btn">
-            <button>Add to card</button>
+        
+             <div class="card-price">
+                '.$product_price.'
+              </div>
+             <div class="card-btn">
+                <button>Add to card</button>
 
-          </div>
-        </div>
-      </div>
-      <div class="col-md-3 card">
-        <div class="card-img">
-          <img src="../assets/images/product_2.jpg" alt="banner-3" />
-        </div>
-        <div class="card-details">
-          <div class="card-price">
-            100000
-          </div>
-          <div class="card-btn">
-            <button>Add to card</button>
+             </div>
 
-          </div>
         </div>
-      </div>
-      <div class="col-md-3 card">
-        <div class="card-img">
-          <a href="Product.php">
 
-            <img src="../assets/images/product_3.jpg" alt="banner-3" />
-          </a>
+     
+        
         </div>
-        <div class="card-details">
-          <div class="card-price">
-            100000
-          </div>
-          <div class="card-btn">
-            <button>Add to card</button>
+         
+       
+    
 
-          </div>
-        </div>
-      </div>
-      <div class="col-md-3 card">
-        <div class="card-img">
-          <img src="../assets/images/product_2.jpg" alt="banner-3" />
-        </div>
-        <div class="card-details">
-          <div class="card-price">
-            100000
-          </div>
-          <div class="card-btn">
-            <button>Add to card</button>
+     
 
-          </div>
-        </div>
-      </div>
+   
+ ';
 
-    </div>
+
+  }
+}
+
+
+
+ 
+
+
+
+ ?>
+  </div>
+    
+   
   </section>
 
 

@@ -1,3 +1,16 @@
+<?php
+include '../../config.php';
+$id = $_GET['productid'];
+$sql = "select * from `products` where id=$id";
+$res = mysqli_query($conn,$sql);
+$row = mysqli_fetch_assoc($res);
+$display_name = $row['Product_Name'];
+$display_desc = $row['product_desc'];
+$display_price = $row['price'];
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -35,8 +48,14 @@
             img
         </div>
         <div class="product-specs">
-            <h3>Acer Predator Helios 300 2020 i7 10th Gen / 16GB RAM / 1TB SSD / RTX 3060 / 15.6" FHD 144Hz</h3>
-            <p>Acer Predator Helios 300 2020 10th Gen i7-107500H, RTX 3060, 16GB RAM, 1TB SSD , 15.6-inch Full-HD display with 144Hz refresh rate, 3ms overdrive response time, and 72% NTSC Color coverage</p>
+            <h3><?php echo $display_name ?></h3>
+            <h3><?php echo $display_name ?></h3>
+            <h3><?php echo $display_name ?></h3>
+            <h3><?php echo $display_desc ?></h3>
+            <h3><?php echo $display_desc ?></h3>
+            <h3><?php echo $display_desc ?></h3>
+            <h3><?php echo $display_price ?></h3>
+            
         </div>
     </section>
 

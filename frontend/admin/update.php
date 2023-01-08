@@ -1,6 +1,13 @@
 <?php
 include '../../config.php';
-$product_id = $_GET['updateid'];
+$id = $_GET['updateid'];
+$sql = "select * from `products` where id=$id";
+$res = mysqli_query($conn,$sql);
+$row = mysqli_fetch_assoc($res);
+$input_product = $row['Product_Name'];
+$input_desc = $row['product_desc'];
+$input_price = $row['price'];
+
 
 if (isset($_POST['submit'])) {  // when user clicks submit, store in db
   $pname = $_POST['pname'];
@@ -8,7 +15,7 @@ if (isset($_POST['submit'])) {  // when user clicks submit, store in db
   $pprice = $_POST['pprice'];
 
 
-  $sql = "update `products` set id= $product_id,Product_Name ='$pname',product_desc='$pdesc',price='$pprice' where id=$product_id";
+  $sql = "update `products` set id=$id,Product_Name='$pname',product_desc='$pdesc',price='$pprice' where id=$id";
   $result = mysqli_query($conn, $sql);
   if ($result) {
     // echo '<script>alert("New Prodct Added")</script>';
@@ -40,7 +47,7 @@ if (isset($_POST['submit'])) {  // when user clicks submit, store in db
   <meta name="description" content="Chameleon Admin is a modern Bootstrap 4 webapp &amp; admin dashboard html template with a large number of components, elegant design, clean and organized code.">
   <meta name="keywords" content="admin template, Chameleon admin template, dashboard template, gradient admin template, responsive admin template, webapp, eCommerce dashboard, analytic dashboard">
   <meta name="author" content="ThemeSelect">
-  <title>Add Product</title>
+  <title>Update Product</title>
   <link rel="apple-touch-icon" href="theme-assets/images/ico/apple-icon-120.png">
   <link rel="shortcut icon" type="image/x-icon" href="theme-assets/images/ico/favicon.ico">
   <link href="https://fonts.googleapis.com/css?family=Muli:300,300i,400,400i,600,600i,700,700i%7CComfortaa:300,400,700" rel="stylesheet">
@@ -153,7 +160,7 @@ if (isset($_POST['submit'])) {  // when user clicks submit, store in db
       <div class="content-wrapper-before"></div>
       <div class="content-header row">
         <div class="content-header-left col-md-4 col-12 mb-2">
-          <h3 class="content-header-title">Add a new Product</h3>
+          <h3 class="content-header-title">Update Product</h3>
         </div>
         <div class="content-header-right col-md-8 col-12">
           <div class="breadcrumbs-top float-md-right">
@@ -189,16 +196,16 @@ if (isset($_POST['submit'])) {  // when user clicks submit, store in db
                       <!-- contant here pls  -->
                       <form method="post">
                         <div class="mb-3">
-                          <label class="form-label">Product Name</label>
-                          <input type="text" class="form-control" placeholder="product name" name="pname">
+                          <label  class="form-label">Product Name</label>
+                          <input value= <?php echo $input_product; ?> type="text" class="form-control" placeholder="product name" name="pname">
                         </div>
                         <div class="mb-3">
                           <label class="form-label">Product Description</label>
-                          <input type="text" class="form-control" placeholder="product name" name="pdesc">
+                          <input value= <?php echo $input_desc; ?> type="text" class="form-control" placeholder="product name" name="pdesc">
                         </div>
                         <div class="mb-3">
                           <label class="form-label">Product Price</label>
-                          <input type="text" class="form-control" placeholder="product name" name="pprice">
+                          <input value= <?php echo $input_price; ?> type="text" class="form-control" placeholder="product name" name="pprice">
                         </div>
 
 
